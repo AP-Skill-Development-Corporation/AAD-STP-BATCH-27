@@ -8,20 +8,30 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 NotificationManager nm;
 NotificationCompat.Builder builder;
 PendingIntent pi;
 Intent myintent;
+EditText et1,et2;
+String name,password;
+SharedPreferences sp;
+SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*call the id's*/
+        et1=findViewById(R.id.editTextTextPersonName);
+        et2=findViewById(R.id.editTextTextPersonName2);
+        sp=getSharedPreferences("muni",MODE_PRIVATE);
         myintent=new Intent(this,MainActivity.class);
         pi=PendingIntent.getActivity(this,2323,myintent,PendingIntent.FLAG_UPDATE_CURRENT);
         nm= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -44,6 +54,33 @@ Intent myintent;
         builder.setDefaults(Notification.DEFAULT_ALL);
         builder.setContentIntent(pi);
         nm.notify(1234,builder.build());
+        /*name=et1.getText().toString();
+        password=et2.getText().toString();
+        name=et1.getText().toString();
+        password=et2.getText().toString();
+        editor.putString("n",name);
+        editor.putString("p",password);
+        editor.apply();*/
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        editor=sp.edit();
+        name=et1.getText().toString();
+        password=et2.getText().toString();
+        editor.putString("n",name);
+        editor.putString("p",password);
+        editor.apply();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String s=sp.getString("n","");
+        String ss=sp.getString("p","");
+        et1.setText(s);
+        et2.setText(ss);
     }
 }
