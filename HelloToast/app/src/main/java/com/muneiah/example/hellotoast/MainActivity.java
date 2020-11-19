@@ -1,5 +1,6 @@
 package com.muneiah.example.hellotoast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -15,6 +16,10 @@ int c=0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         label_text=findViewById(R.id.tv);
+        if (savedInstanceState!=null && savedInstanceState.containsKey("key")){
+           c=savedInstanceState.getInt("key");
+            label_text.setText(String.valueOf(c));
+        }
     }
 
     public void showToast(View view) {
@@ -22,6 +27,13 @@ int c=0;
     }
 
     public void showCount(View view) {
+        c++;
+        label_text.setText(String.valueOf(c));
+    }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("key",c);
     }
 }
