@@ -35,7 +35,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentH
         holder.d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.dataBase.studentDAO().deleteData(list.get(position));
+              //  MainActivity.dataBase.studentDAO().deleteData(list.get(position));
+                MainActivity.viewModel.delete(list.get(position));
                 Toast.makeText(ctx, holder.name.getText().toString()+" Deleted", Toast.LENGTH_SHORT).show();
             }
         });

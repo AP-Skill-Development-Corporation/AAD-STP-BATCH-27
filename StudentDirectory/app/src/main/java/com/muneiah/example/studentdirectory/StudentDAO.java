@@ -1,5 +1,6 @@
 package com.muneiah.example.studentdirectory;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -18,5 +19,6 @@ public interface StudentDAO {
     public void deleteData(StudentEntity entity);
 
     @Query("SELECT * FROM student_directory")
-    public List<StudentEntity> retrivetData();
+   // public List<StudentEntity> retrivetData();
+    public LiveData<List<StudentEntity>> retrivetLiveData();
 }
