@@ -1,5 +1,7 @@
 # Retrofit— A simple implimentation in Android 
 
+* Covid 19 API https://api.covid19api.com/dayone/country/IN
+
 * For this document, we are going to see how to use Retrofit HTTP client in your Android application.
 * [Official link for Retrofit](https://square.github.io/retrofit/)
 
